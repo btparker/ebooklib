@@ -1637,7 +1637,6 @@ class EpubReader(object):
         spine = self.container.find('{%s}%s' % (NAMESPACES['OPF'], 'spine'))
 
         self.book.spine = [(t.get('idref'), t.get('linear', 'yes')) for t in spine]
- sh
         toc = spine.get('toc', '')
         self.book.set_direction(spine.get('page-progression-direction', None))
 
