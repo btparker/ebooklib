@@ -413,13 +413,12 @@ class EpubHtml(EpubItem):
             else:
                 _lnk = etree.SubElement(_head, 'link', lnk)
 
-        # this should not be like this
-        # head = html_root.find('head')
-        # if head is not None:
-        #     for i in head.getchildren():
-        #         if i.tag == 'title' and self.title != '':
-        #             continue
-        #         _head.append(i)
+        head = html_root.find('head')
+        if head is not None:
+            for i in head.getchildren():
+                if i.tag == 'title' and self.title != '':
+                    continue
+                _head.append(i)
 
         # create and populate body
 
@@ -1638,7 +1637,7 @@ class EpubReader(object):
         spine = self.container.find('{%s}%s' % (NAMESPACES['OPF'], 'spine'))
 
         self.book.spine = [(t.get('idref'), t.get('linear', 'yes')) for t in spine]
-
+ sh
         toc = spine.get('toc', '')
         self.book.set_direction(spine.get('page-progression-direction', None))
 
